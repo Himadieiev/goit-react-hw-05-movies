@@ -1,0 +1,15 @@
+.title {
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.item {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.loading {
+  font-size: 20px;
+  margin-left: 10px;
+}
