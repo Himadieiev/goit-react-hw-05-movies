@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Movie.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Movie = ({ dataMovie }) => {
-  const location = useLocation();
-
   if (!dataMovie) {
     return null;
   }
@@ -15,7 +13,9 @@ const Movie = ({ dataMovie }) => {
 
   return (
     <div>
-      <Link to={location.state}>Go back</Link>
+      <button className={css.btn} onClick={() => window.history.back()}>
+        Go back
+      </button>
       <div className={css.mainInfoMovie}>
         <img
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}

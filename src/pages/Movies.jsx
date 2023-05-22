@@ -1,20 +1,29 @@
-import React, { useState } from 'react';
-// import { useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import Search from 'components/Search/Search';
 import getSearchMovies from 'services/apiSearchMovies';
 import MovieList from 'components/MovieList/MovieList';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(searchParams);
+  useEffect(() => {
+    const searchTerm = searchParams.get('search');
+    if (searchTerm) {
+      handleSearch(searchTerm);
+    }
+  }, [location, searchParams]);
+
+  const handleSearch = async searchTerm => {
+    const searchedMovies = await getSearchMovies(searchTerm);
+    setMovies(searchedMovies);
+  };
 
   const handleFormSubmit = async movie => {
-    const searchedMovies = await getSearchMovies(movie);
-
-    setMovies(searchedMovies);
+    setSearchParams({ search: movie });
+    handleSearch(movie);
   };
 
   return (

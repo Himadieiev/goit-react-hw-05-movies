@@ -1,16 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './Search.module.css';
-import { useLocation } from 'react-router-dom';
 
-export default function Search({ onSubmitForm, setSearchParams }) {
+const Search = ({ onSubmitForm }) => {
   const [movie, setMovie] = useState('');
-  const location = useLocation();
-  console.log(location);
 
   const handleInput = e => {
     setMovie(e.currentTarget.value.toLowerCase());
-    setSearchParams({ search: e.currentTarget.value.toLowerCase() });
   };
 
   const handleSubmit = e => {
@@ -42,8 +38,10 @@ export default function Search({ onSubmitForm, setSearchParams }) {
       </button>
     </form>
   );
-}
+};
 
 Search.propTypes = {
   onSubmitForm: PropTypes.func.isRequired,
 };
+
+export default Search;

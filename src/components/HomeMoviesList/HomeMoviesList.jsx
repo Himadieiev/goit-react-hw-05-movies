@@ -1,13 +1,10 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import getTrendingMovies from 'services/apiTrendingMovies';
 import css from './HomeMoviesList.module.css';
 import { Link } from 'react-router-dom';
 
 const HomeMoviesList = () => {
   const [data, setData] = useState(null);
-  // const location = useLocation;
-  // console.log(location);
 
   useEffect(() => {
     const fetchMovies = async () => {
