@@ -14,8 +14,8 @@ const MovieList = ({ movies }) => {
             key={movie}
             to={{
               pathname: `/movies/${movie.id}`,
-              state: { from: location.pathname },
             }}
+            state={{ from: location }}
           >
             {movie.title || movie.name}
           </Link>

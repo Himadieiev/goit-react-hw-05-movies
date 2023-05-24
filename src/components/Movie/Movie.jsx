@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import css from './Movie.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-const Movie = ({ dataMovie }) => {
+const Movie = ({ dataMovie, backLinkHref }) => {
+  const location = useLocation();
+
   if (!dataMovie) {
     return null;
   }
@@ -13,9 +15,9 @@ const Movie = ({ dataMovie }) => {
 
   return (
     <div>
-      <button className={css.btn} onClick={() => window.history.back()}>
+      <Link className={css.link} to={backLinkHref}>
         Go back
-      </button>
+      </Link>
       <div className={css.mainInfoMovie}>
         <img
           src={`https://image.tmdb.org/t/p/w300${poster_path}`}
@@ -38,10 +40,20 @@ const Movie = ({ dataMovie }) => {
       <p className={css.addInfo}>Additional information</p>
       <ul>
         <li>
-          <Link to={`/movies/${dataMovie.id}/cast`}>Cast</Link>
+          <Link
+            to={`/movies/${dataMovie.id}/cast`}
+            state={{ from: location?.state?.from }}
+          >
+            Cast
+          </Link>
         </li>
         <li>
-          <Link to={`/movies/${dataMovie.id}/reviews`}>Reviews</Link>
+          <Link
+            to={`/movies/${dataMovie.id}/reviews`}
+            state={{ from: location?.state?.from }}
+          >
+            Reviews
+          </Link>
         </li>
       </ul>
     </div>
